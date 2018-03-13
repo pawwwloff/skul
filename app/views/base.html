@@ -1,0 +1,29 @@
+<!-- /views/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+    <title>
+    	{% block title %}
+			{{title}}	
+		{% endblock %}
+	</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link href="/css/main.css" type="text/css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+</head>
+<body>
+
+	<main class="h-100 w-100 d-flex flex-column flex-grow-1 flex-nowrap relative">
+		{% block main %}
+		
+		{% endblock %}
+	</main>
+</body>
+</html>

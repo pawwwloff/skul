@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% block title %}
+	Main page
+{% endblock %}
+{% block main %}
+	<div class="container pt-5 pb-5">
+		<div class="alert alert-success" role="alert">Параметры подключение к Mysql в /config/config_db.php</div>
+		<div class="alert alert-success" role="alert">В проекте использовались faker и twig</div>
+		<h2>Api</h2>
+		<div class="row">
+		  	<div class="col-4">
+		    	<div class="list-group" id="list-tab" role="tablist">
+		      		<a class="list-group-item list-group-item-action active" id="authors" data-toggle="list" href="#authors-list" role="tab" aria-controls="authors">/api/author</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="authors-id" data-toggle="list" href="#authors-id-list" role="tab" aria-controls="authors-id-list">/api/author/{id}/news</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="category" data-toggle="list" href="#category-list" role="tab" aria-controls="categorys-list">/api/category</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="category-id" data-toggle="list" href="#category-id-list" role="tab" aria-controls="category-id-list">/api/category/{id}/news</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="category-child" data-toggle="list" href="#category-child-list" role="tab" aria-controls="category-child-list">/api/category/{id}/news?child=yes</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="news" data-toggle="list" href="#news-list" role="tab" aria-controls="news-list">/api/news</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="news-id" data-toggle="list" href="#news-id-list" role="tab" aria-controls="news-id-list">/api/news/{id}</a>
+		      		
+		      		<a class="list-group-item list-group-item-action" id="news-name" data-toggle="list" href="#news-name-list" role="tab" aria-controls="news-name-list">/api/news?name={name}</a>
+		      		
+		    	</div>
+		  	</div>
+		  	<div class="col-8 pt-5">
+		    	<div class="tab-content" id="nav-tabContent">
+		      		<div class="tab-pane fade show active" id="authors-list" role="tabpanel" aria-labelledby="authors">
+		      			<h4>Возварщает список всех авторов</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/author">/api/author</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id автора;</br>
+						name - имя автора;</br>
+						email - емаил автора;</br>
+						<div class="p-0">[
+							<div class="pl-3">{
+								<div class="pl-3">"id":1,</br>
+												"name":"name",</br>
+												"email":"email@email.com"</br>
+								</div>
+								},</br>
+								{</br>...</br>}
+							</div>]
+						</div>
+		      		</div>
+		      		
+		      		<div class="tab-pane fade" id="authors-id-list" role="tabpanel" aria-labelledby="authors-id">
+		    			<h4>Возварщает список новостей автора по id</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/author/2/news">/api/author/2/news</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										{</br>
+											...</br>
+										}</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		<div class="tab-pane fade" id="category-list" role="tabpanel" aria-labelledby="category">
+		      			<h4>Возварщает список всех категорий</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/category">/api/category</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id категории;</br>
+						name - название категории;</br>
+						parent - родительская категория;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+							<div class="pl-3">"id":10,</br>
+							"name":"vitae",</br>
+							"parent":6</br></div>
+							},</br>
+							{</br>
+							...</br>
+							}
+							</div>
+							]
+						</div>
+		      		</div>
+		    		
+		    		<div class="tab-pane fade" id="category-id-list" role="tabpanel" aria-labelledby="category-id">
+		    			<h4>Возварщает список новостей по категории</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/category/2/news">/api/category/2/news</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										{</br>
+											...</br>
+										}</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		<div class="tab-pane fade" id="category-child-list" role="tabpanel" aria-labelledby="category-child">
+		    			<h4>Возварщает список новостей по категории, включая дочерние категории</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/category/2/news?child=yes">/api/category/2/news?child=yes</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										{</br>
+											...</br>
+										}</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		<div class="tab-pane fade" id="news-list" role="tabpanel" aria-labelledby="news">
+		    			<h4>Возварщает список всех новостей</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/news">/api/news</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										{</br>
+											...</br>
+										}</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		<div class="tab-pane fade" id="news-id-list" role="tabpanel" aria-labelledby="news-id">
+		    			<h4>Возварщает новость по id</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/news/2">/api/news/2</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		<div class="tab-pane fade" id="news-name-list" role="tabpanel" aria-labelledby="news-name">
+		    			<h4>Возварщает список новостей по названию</h4></br>
+		      			<h5>Тип запроса - get</h5></br>
+		      			<h5>Пример - <a href="/api/news?name=debitis">/api/news?name=debitis</a></h5>
+		      			<h5>Возвращаемые поля:</h5>
+		      			id - id новости;</br>
+						name - название новости;</br>
+						text - описание новости;</br>
+						category - id категории;</br>
+						author - id автора;</br>
+						categories - массив категорий состоит из id, name, parent;</br>
+						<div class="p-0">[
+							<div class="pl-3">{</br>
+											<div class="pl-3">"id":1,</br>
+											"name":"name",</br>
+											"text":"...",</br>
+											"category":2,</br>
+											"author":3,</br>
+											"categories":[</br>
+											<div class="pl-3">{</br>
+												<div class="pl-3">"id":3,</br>
+												"name":"repellendus",</br>
+												"parent":2</br></div>
+												},</br>
+												{</br>
+												...</br>
+												}</br>
+											</div>
+											]</br></div>
+										},</br>
+										{</br>
+											...</br>
+										}</div>
+									]
+						</div>
+		    		</div>
+		    		
+		    		
+		      		
+		    	</div>
+		  	</div>
+		  	
+		</div>
+	</div>
+{% endblock %}

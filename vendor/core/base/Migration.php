@@ -23,9 +23,13 @@ abstract class Migration{
 	
 	protected function primary($name){
 		if(isset($this->data["PRIMARY KEY"]))
-			$this->data["PRIMARY KEY"] .= "$name";
+			return $this;
 		else
 			$this->data["PRIMARY KEY"] = "$name";
+		return $this;
+	}
+	protected function foreignKey($name, $table, $field = 'id'){
+		$this->data["FOREIGN KEY"][] = "($name) REFERENCES `$table`($field)";
 		return $this;
 	}
 	
@@ -37,12 +41,20 @@ abstract class Migration{
 		return $this;
 	}
 	
-	protected function text($name, $strln='255'){
+	protected function varchar($name, $strln='255'){
 		if(isset($this->data[$name]))
 			$this->data[$name] .= " varchar($strln)";
 		else
 			$this->data[$name] = " varchar($strln)";
 		return $this;
+	}
+	
+	protected function text($name){
+		if(isset($this->data[$name]))
+			$this->data[$name] .= " TEXT";
+			else
+				$this->data[$name] = " TEXT";
+				return $this;
 	}
 	
 	protected function int($name){
@@ -68,13 +80,21 @@ abstract class Migration{
 	private function prepareData($data){
 		$str = '';
 		foreach ($data as $key=>$val)
-			if($key!="PRIMARY KEY")
+			if($key!="PRIMARY KEY" && $key!="FOREIGN KEY")
 				$str .= $key.$val.', ';
 		if(isset($data["PRIMARY KEY"])){
-			$str .= " PRIMARY KEY ({$data['PRIMARY KEY']})";
-		}else{
-			$str = substr($str, 0, -2);
+			$str .= " PRIMARY KEY ({$data['PRIMARY KEY']}), ";
+			$substr = false;
 		}
+		if(isset($data["FOREIGN KEY"])){
+			foreach ($data["FOREIGN KEY"] as $foreign){
+				$str .= " FOREIGN KEY {$foreign}, ";
+			}
+			$substr = false;
+		}
+
+		$str = substr($str, 0, -2);
+
 		return $str;
 	}
 }

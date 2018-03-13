@@ -8,4 +8,6 @@ class Author extends Model{
 	 
 	public $table = 'authors';
 	
+	
+	
 }
