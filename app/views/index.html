@@ -6,6 +6,9 @@
 	<div class="container pt-5 pb-5">
 		<div class="alert alert-success" role="alert">Параметры подключение к Mysql в /config/config_db.php</div>
 		<div class="alert alert-success" role="alert">В проекте использовались faker и twig</div>
+		<div class="alert alert-success" role="alert">Для запуска миграций необходимо перейти по адресу <a href="/migration">/migration</a></div>
+		<div class="alert alert-success" role="alert"><a href="/migration/drop">/migration/drop</a> удаляет таблицы из базы данных</div>
+		<div class="alert alert-success" role="alert"><a href="/migration/drop">/seeds</a> Наполняет базу тестовыми данными. Для наполниения используется faker.</div>
 		<h2>Api</h2>
 		<div class="row">
 		  	<div class="col-4">
@@ -258,7 +261,7 @@
 		    		<div class="tab-pane fade" id="news-name-list" role="tabpanel" aria-labelledby="news-name">
 		    			<h4>Возварщает список новостей по названию</h4></br>
 		      			<h5>Тип запроса - get</h5></br>
-		      			<h5>Пример - <a href="/api/news?name=debitis">/api/news?name=debitis</a></h5>
+		      			<h5>Пример - <a href="/api/news?name=is">/api/news?name=is</a></h5>
 		      			<h5>Возвращаемые поля:</h5>
 		      			id - id новости;</br>
 						name - название новости;</br>
